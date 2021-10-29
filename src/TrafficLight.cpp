@@ -17,7 +17,7 @@ void TrafficLight::waitForGreen() {
 TrafficLight::TrafficLight() { _currentPhase = TrafficLightPhase::red; }
 
 void TrafficLight::simulate() {
-  threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
+  cycleThroughPhases();
   // FP.2b : Finally, the private method „cycleThroughPhases“ should be
   //   started in a thread when the public method „simulate“ is called.To do
   //   this,use the thread queue in the base class.
