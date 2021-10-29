@@ -29,14 +29,10 @@ void TrafficLight::cycleThroughPhases() {
   // move semantics. The cycle duration should be a random value between 4 and 6
   // seconds. Also, the while-loop should use std::this_thread::sleep_for to
   // wait 1ms between two cycles.
-
-  std::mt19937 rng(time(0));
-  std::uniform_int_distribution<int> gen(4, 6);
-
   std::chrono::time_point<std::chrono::system_clock> lastUpdate;
   std::random_device rd;
   std::mt19937 eng(rd());
-  std::uniform_int_distribution<> distr(4, 6);
+  std::uniform_int_distribution<> distr(10,12);
   int cycleDuration = distr(eng);
   std::cout<<"Cycle duration is "<<cycleDuration<<std::endl;
   // init stop watch
