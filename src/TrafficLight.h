@@ -28,8 +28,8 @@ public:
     }); // pass unique lock to condition variable
 
     // remove last vector element from queue
-    T v = std::move(_queue.back());
-    _queue.pop_back();
+    T v = std::move(_queue.front());
+    _queue.pop_front();
 
     return v; // will not be copied due to return value optimization (RVO) in
               // C++
@@ -37,8 +37,6 @@ public:
 
   void send(T &&v) {
     // simulate some work
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
     // perform vector modification under the lock
     std::lock_guard<std::mutex> uLock(_mutex);
 
