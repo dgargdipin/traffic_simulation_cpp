@@ -32,7 +32,7 @@ void TrafficLight::cycleThroughPhases() {
   std::chrono::time_point<std::chrono::system_clock> lastUpdate;
   std::random_device rd;
   std::mt19937 eng(rd());
-  std::uniform_int_distribution<> distr(10,12);
+  std::uniform_int_distribution<> distr(4,6);
   int cycleDuration = distr(eng);
   std::cout<<"Cycle duration is "<<cycleDuration<<std::endl;
   // init stop watch

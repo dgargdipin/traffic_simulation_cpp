@@ -42,7 +42,7 @@ public:
 
     // add vector to queue
     _queue.emplace_back(std::move(v));
-    _cond.notify_all(); // notify client after pushing new Vehicle into vector
+    _cond.notify_one(); // notify client after pushing new Vehicle into vector
   }
 
 private:
