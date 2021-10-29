@@ -31,17 +31,15 @@ afterwards send a notification.
 
 
 
-TrafficLightPhase TrafficLight::getCurrentPhase()
-{
-    return _currentPhase;
-}
-
 
 
 // virtual function which is executed in a thread
 
 
 */
+
+TrafficLightPhase TrafficLight::getCurrentPhase() { return _currentPhase; }
+
 void TrafficLight::waitForGreen() {
   // FP.5b : add the implementation of the method waitForGreen, in which an
   //infinite while - loop
