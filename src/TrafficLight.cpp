@@ -57,8 +57,8 @@ void TrafficLight::cycleThroughPhases() {
         _currentPhase = TrafficLightPhase::red;
     
         TrafficLightPhase message=_currentPhase;
-        message_queue.send(std::move(message));
         lastUpdate = std::chrono::system_clock::now();
+        message_queue.send(std::move(message));
     }
   }
 }
