@@ -11,7 +11,10 @@ void TrafficLight::waitForGreen() {
   // Once it receives TrafficLightPhase::green, the method returns.
   while(true){
       TrafficLightPhase curr_signal=message_queue.receive();
-      if(curr_signal==TrafficLightPhase::green)return;
+      if(curr_signal==TrafficLightPhase::green){
+        std::cout<<"Thread id "<<std::this_thread::get_id()<<" received green"<<std::endl;
+        return;
+      }
   }
 }
 TrafficLight::TrafficLight() { _currentPhase = TrafficLightPhase::red; }
