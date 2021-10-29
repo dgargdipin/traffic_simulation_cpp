@@ -5,7 +5,7 @@
 #include <condition_variable>
 #include <deque>
 #include <mutex>
-
+#include <random>
 // forward declarations to avoid include cycle
 class Vehicle;
 
@@ -18,32 +18,10 @@ class Vehicle;
 
 template <class T> class MessageQueue {
 public:
-  MessageQueue() {}
 
-  T receive() {
-    // perform vector modification under the lock
-    std::unique_lock<std::mutex> uLock(_mutex);
-    _cond.wait(uLock, [this] {
-      return !_queue.empty();
-    }); // pass unique lock to condition variable
+  T receive();
 
-    // remove last vector element from queue
-    T v = std::move(_queue.front());
-    _queue.pop_front();
-
-    return v; // will not be copied due to return value optimization (RVO) in
-              // C++
-  }
-
-  void send(T &&v) {
-    // simulate some work
-    // perform vector modification under the lock
-    std::lock_guard<std::mutex> uLock(_mutex);
-
-    // add vector to queue
-    _queue.emplace_back(std::move(v));
-    _cond.notify_all(); // notify client after pushing new Vehicle into vector
-  }
+  void send(T &&v);
 
 private:
   std::mutex _mutex;
@@ -68,6 +46,7 @@ public:
   TrafficLightPhase getCurrentPhase();
   // constructor / desctructor
   TrafficLight();
+  ~TrafficLight();
 
   // getters / setters
 
@@ -84,6 +63,8 @@ private:
   MessageQueue<TrafficLightPhase> message_queue;
   std::condition_variable _condition;
   std::mutex _mutex;
+  static std::random_device rd;
+  static std::mt19937 eng;
 };
 
 #endif
